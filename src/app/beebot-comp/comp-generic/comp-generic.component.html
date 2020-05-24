@@ -1,0 +1,9 @@
+<ion-list *ngFor="let entry of entries">
+  <ion-item>
+    <ion-label>{{entry.name}}</ion-label>
+    <ion-input *ngIf="entry.type =='String'" [(ngModel)]="object[entry.name]" [placeholder]="entry.defaultValue"></ion-input>
+    <ion-checkbox *ngIf="entry.type =='Boolean'" [(ngModel)]="object[entry.name]"></ion-checkbox>
+    <ion-input *ngIf="entry.type =='int'" type="number" [(ngModel)]="object[entry.name]" [placeholder]="entry.defaultValue"></ion-input>
+
+  </ion-item>
+</ion-list>

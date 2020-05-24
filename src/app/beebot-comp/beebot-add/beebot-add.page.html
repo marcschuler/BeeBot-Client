@@ -1,0 +1,22 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Add a BeeBot</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <app-comp-generic [entries]="entries" [object]="teamspeakConfig"></app-comp-generic>
+
+  <ion-button (click)="create()" expand="block">Create</ion-button>
+
+  <ion-spinner *ngIf="state==1"></ion-spinner>
+
+  <ion-list>
+    <ion-item *ngFor="let error of errors">
+      <ion-icon name="warning-outline" color="danger"></ion-icon>
+      <b>{{error.path}}</b> {{error.violation}}
+    </ion-item>
+  </ion-list>
+
+</ion-content>

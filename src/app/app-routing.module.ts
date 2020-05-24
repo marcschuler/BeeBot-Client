@@ -8,8 +8,24 @@ const routes: Routes = [
     pathMatch: 'full'
   },
   {
-    path: 'folder/:id',
-    loadChildren: () => import('./folder/folder.module').then( m => m.FolderPageModule)
+    path: 'server-add',
+    loadChildren: () => import('./server/server.module').then( m => m.ServerPageModule)
+  },
+  {
+    path: 'beebot-add',
+    loadChildren: () => import('./beebot-comp/beebot-add/beebot-add.module').then( m => m.BeebotAddPageModule)
+  },
+  {
+    path: 'beebot/:uid',
+    loadChildren: () => import('./beebot/beebot.module').then( m => m.BeebotPageModule)
+  },
+  {
+    path: 'server',
+    loadChildren: () => import('./server-stats/server-stats.module').then( m => m.ServerStatsPageModule)
+  },
+  {
+    path: 'modules',
+    loadChildren: () => import('./beebot-comp/modules/modules.module').then( m => m.ModulesPageModule)
   }
 ];
 

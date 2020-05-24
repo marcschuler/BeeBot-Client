@@ -1,0 +1,53 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-title>BeeBot {{serverState.teamspeakConfig.name}}
+            <ion-badge *ngIf="!serverState.online" color="danger">Offline</ion-badge>
+        </ion-title>
+        <ion-buttons slot="end">
+            <ion-button>
+                <ion-icon name="create-outline"></ion-icon>
+            </ion-button>
+
+        </ion-buttons>
+    </ion-toolbar>
+
+</ion-header>
+
+<ion-content>
+
+    <ion-grid>
+        <ion-row>
+            <ion-col size="10">
+                <h2>Modules</h2>
+            </ion-col>
+            <ion-col size="2">
+                <ion-button expand="full" [routerLink]="'/modules'">
+                    <ion-icon name="add-circle-outline" ></ion-icon>
+                </ion-button>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+    <p *ngFor="let module of modulesList">{{module}}</p>
+
+    <h2>Logs</h2>
+
+    <ion-badge *ngFor="let type of logTypes" [color]="selectedTypes.includes(type)?'primary':'dark'"
+               (click)="logChange(type)">{{type}}</ion-badge>
+    <ion-list>
+    <div *ngFor="let log of logs">
+        <ion-item *ngIf="selectedTypes.includes(log.type)">
+            <ion-grid>
+                <ion-row>
+                    <ion-col size="1">
+                        <ion-icon *ngIf="log.type=='INFO'"></ion-icon>
+                        <ion-icon *ngIf="log.type=='WARNING'" color="warning"></ion-icon>
+                        <ion-icon *ngIf="log.type=='ERROR'" color="danger" name="warning-outline"></ion-icon>
+                    </ion-col>
+                    <ion-col size="2">{{log.datetime | date: 'HH:mm:ss'}}</ion-col>
+                    <ion-col size="9">{{log.message}}</ion-col>
+                </ion-row>
+            </ion-grid>
+        </ion-item>
+    </div>
+    </ion-list>
+</ion-content>
