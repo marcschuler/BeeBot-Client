@@ -12,12 +12,18 @@ import {DataService} from "./services/data.service";
   styleUrls: ['app.component.scss']
 })
 export class AppComponent implements OnInit {
-  public selectedIndex = 0;
-  public appPages = [
+  public selectedIndex;
+  public appPages = [ {
+    title: 'Overview',
+    url: '/overview',
+    icon: 'home',
+    onlyLogin: false
+  },
     {
       title: 'Server',
       url: '/server',
-      icon: 'server'
+      icon: 'server',
+      onlyLogin: true
     },
 
   ];

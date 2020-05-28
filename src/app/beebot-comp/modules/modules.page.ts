@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {RestService} from "../../services/rest.service";
+import {RestService, Violation} from "../../services/rest.service";
 import {ServerStats} from "../../server-stats/server-stats.page";
 import {ServerState} from "../../services/login.service";
 
@@ -19,6 +19,8 @@ export class ModulesPage implements OnInit {
     definition: any[] = [];
     moduleConfig: any = {};
 
+    violations:Violation[];
+
     constructor(public rest: RestService) {
     }
 
@@ -36,14 +38,19 @@ export class ModulesPage implements OnInit {
         this.definition = [];
         console.log("Selecting " + module.name + " (" + module.id + ")");
         this.selectedModule = module;
-        this.rest.get<any[]>('modules/webvalue/' + module.id).subscribe(s => {
-            this.definition = s;
-        })
+        this.rest.modulesWebValue(module.id).subscribe(s=>this.definition=s);
+
     }
 
     selectBot($event: any) {
         this.selectedBot = $event.target.value;
-        console.log("Select bot " + this.selectedBot.teamspeakConfig.name);
+        console.log("Select bot " +JSON.stringify(this.selectedBot));
+    }
+
+    create() {
+        this.rest.botModuleCreate(this.selectedBot.id,this.selectedModule.id,this.moduleConfig).subscribe(v =>{
+           this.violations = v;
+        });
     }
 }
 

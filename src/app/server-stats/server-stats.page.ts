@@ -1,6 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {LoginService} from "../services/login.service";
 import {RestService} from "../services/rest.service";
+import {ToastController} from "@ionic/angular";
 
 @Component({
     selector: 'app-server-stats',
@@ -13,7 +14,7 @@ export class ServerStatsPage {
 
     interval: any;
 
-    constructor(public login: LoginService, public rest: RestService) {
+    constructor(public login: LoginService, public rest: RestService,public toast:ToastController) {
     }
 
     ionViewWillEnter() {
@@ -31,10 +32,31 @@ export class ServerStatsPage {
     }
 
 
+    copy(value: string) {
+        const selBox = document.createElement('textarea');
+        selBox.style.position = 'fixed';
+        selBox.style.left = '0';
+        selBox.style.top = '0';
+        selBox.style.opacity = '0';
+        selBox.value = value;
+        document.body.appendChild(selBox);
+        selBox.focus();
+        selBox.select();
+        document.execCommand('copy');
+        document.body.removeChild(selBox);
 
+        this.toast.create({
+            message:'Copied to clipboard'
+        }).then(t=>t.present());
+    }
 }
 
 export class ServerStats {
-    usedMemory: number;
-    totalMemory: number;
+    os: string;
+    docker: boolean;
+
+    version: string;
+
+    memoryUsed: number;
+    memoryTotal: number;
 }

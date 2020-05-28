@@ -1,0 +1,32 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-menu-button></ion-menu-button>
+        </ion-buttons>
+        <ion-title>BeeBot</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+    <ion-card *ngIf="login.login==null">
+        <ion-card-header>
+            <ion-card-title>Login</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+            You need to login to use BeeBot. Click <a [routerLink]="['/server-add']">here</a> to login
+        </ion-card-content>
+    </ion-card>
+
+
+    <ion-card>
+        <ion-card-header>
+            <ion-card-subtitle>May 2020</ion-card-subtitle>
+            <ion-card-title>Changelog</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+            <p>+ Added basic functionality</p>
+        </ion-card-content>
+    </ion-card>
+
+</ion-content>

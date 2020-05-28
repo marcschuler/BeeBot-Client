@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {LoginService, Login} from "../services/login.service";
 import {RestService} from "../services/rest.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-server',
@@ -17,7 +18,7 @@ export class ServerPage implements OnInit {
   loginError : string = null;
   loginErrorText: string = null;
 
-  constructor(public data:LoginService, public rest:RestService) { }
+  constructor(public data:LoginService, public rest:RestService,public router:Router) { }
 
   ngOnInit() {
   }
@@ -30,6 +31,7 @@ export class ServerPage implements OnInit {
       this.loginError=null;
       this.loginErrorText = null;
       this.data.saveLogin(this.login);
+      this.router.navigateByUrl("/server")
     },e=>{
       console.log("could not login: " + JSON.stringify(e));
       this.loginState = 3;

@@ -1,0 +1,25 @@
+<ion-grid>
+    <ion-row>
+        <ion-col size="10">
+        <h2>{{worker.name}}</h2>
+        </ion-col>
+        <ion-col size="2">
+            <ion-button [color]="expanded?'secondary':'light'" (click)="expanded=!expanded">
+                <ion-icon name="caret-down-circle-outline"></ion-icon>
+            </ion-button>
+            <ion-button  (click)="delete()" color="light">
+                <ion-icon name="trash-outline" color="danger"></ion-icon>
+            </ion-button>
+        </ion-col>
+    </ion-row>
+    <ion-row>
+        <ion-col size="11">
+            {{worker.description}}
+        </ion-col>
+    </ion-row>
+    <ion-row *ngIf="expanded">
+        <ion-col *ngIf="moduleInfo!=null && moduleData!=null">
+            <app-comp-generic [entries]="moduleInfo" [uid]="worker.botId" [object]="moduleData"></app-comp-generic>
+        </ion-col>
+    </ion-row>
+</ion-grid>

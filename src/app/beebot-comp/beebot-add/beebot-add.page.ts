@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Entry} from "../generic-comp.service";
 import {TeamspeakConfig} from "../../services/login.service";
-import {RestService} from "../../services/rest.service";
+import {RestService, Violation} from "../../services/rest.service";
 import {DataService} from "../../services/data.service";
 import {isArray} from "util";
 
@@ -56,7 +56,7 @@ export class BeebotAddPage implements OnInit {
 
 
     state = 0;
-    errors: any[]=[];
+    violations: Violation[];
 
     constructor(public rest: RestService, public data: DataService) {
     }
@@ -69,7 +69,7 @@ export class BeebotAddPage implements OnInit {
         this.rest.put<any[]>('beebot', this.teamspeakConfig).subscribe(s => {
             if (s.length>0){
                 this.state=3;
-                this.errors = s;
+                this.violations = s;
             }
             this.state = 2;
             this.data.reloadBeeBots();

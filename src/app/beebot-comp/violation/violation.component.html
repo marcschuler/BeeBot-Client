@@ -1,0 +1,6 @@
+<ion-list *ngIf="violations">
+  <ion-item *ngFor="let violation of violations">
+    <ion-icon name="warning-outline" color="danger"></ion-icon>
+    <b>{{violation.path}}</b> {{violation.violation}}
+  </ion-item>
+</ion-list>

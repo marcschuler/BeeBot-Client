@@ -1,7 +1,9 @@
 import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute} from "@angular/router";
-import {RestService} from "../services/rest.service";
+import {ActivatedRoute, Router} from "@angular/router";
+import {RestService, WorkerData} from "../services/rest.service";
 import {ServerState, TeamspeakConfig} from "../services/login.service";
+import {ActionSheetController, AlertController} from "@ionic/angular";
+import {DataService} from "../services/data.service";
 
 @Component({
     selector: 'app-beebot',
@@ -13,6 +15,7 @@ export class BeebotPage implements OnInit {
     uid: string;
 
     serverState: ServerState;
+    worker: WorkerData[] = [];
 
     modulesList: string[] = [];
     logs:WebLog[] = [];
@@ -20,7 +23,9 @@ export class BeebotPage implements OnInit {
     logTypes: string[] = ["INFO","WARNING","ERROR"];
     selectedTypes:string[] = ["ERROR"]
 
-    constructor(public route: ActivatedRoute, public rest: RestService) {
+    constructor(public route: ActivatedRoute, public router:Router,
+                public rest: RestService, public data:DataService,
+                public actionController: ActionSheetController, public alertController:AlertController) {
     }
 
     ngOnInit() {
@@ -29,14 +34,9 @@ export class BeebotPage implements OnInit {
         this.serverState.online = true;
 
         this.uid = this.route.snapshot.paramMap.get('uid');
-        this.rest.get<ServerState>('beebot/' + this.uid).subscribe(s => {
-            this.serverState = s;
-        })
-
-
-        this.rest.get<WebLog[]>('beebot/' + this.uid + '/logs').subscribe(s => {
-            this.logs = s.reverse();
-        })
+        this.rest.get<ServerState>('beebot/' + this.uid).subscribe(s => { this.serverState = s;})
+        this.rest.get<WebLog[]>('beebot/' + this.uid + '/logs').subscribe(s => {this.logs = s.reverse();})
+        this.rest.botModules(this.uid).subscribe(s => this.worker = s);
     }
 
     logChange(type: string) {
@@ -45,6 +45,39 @@ export class BeebotPage implements OnInit {
         }else{
             this.selectedTypes.push(type);
         }
+    }
+
+    openActions(){
+        this.actionController.create({
+            header: 'BeeBot',
+            buttons:[{
+                text: 'Delete',
+                icon: 'trash',
+                handler: ()=> this.delete()
+            }]
+        }).then(a => a.present());
+    }
+
+    delete(){
+        this.alertController.create({
+                header:'Delete BeeBot?',
+            subHeader:'You cannot change this anymore',
+            buttons:[
+               {
+                    text:'Cancel',
+                    role:'cancel'
+                }, {
+                    text:'Delete',
+                    handler: ()=>{
+                        console.log('Deleting BeeBot ' + this.uid)
+                        this.rest.delete('beebot/' + this.uid).subscribe(()=>{
+                            this.router.navigateByUrl('/')
+                            this.data.reloadBeeBots();
+                        });
+                    }
+                }
+            ]
+        }).then(a => a.present());
     }
 }
 

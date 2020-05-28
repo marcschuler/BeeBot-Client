@@ -1,28 +1,54 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>Server Status</ion-title>
-  </ion-toolbar>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-menu-button></ion-menu-button>
+        </ion-buttons>
+        <ion-title>Server Status</ion-title>
+    </ion-toolbar>
 </ion-header>
 
 <ion-content>
-    <ion-card>
-      <ion-card-header>
-        <ion-card-title>Server</ion-card-title>
-      </ion-card-header>
-      <ion-card-content>
-        Base URL: {{login.login.server}}<br>
-        Token : {{login.login.token}}
-      </ion-card-content>
-    </ion-card>
+    <ion-grid>
+        <ion-row>
+            <ion-col size="12" sizeMd="6">
+                <ion-card>
+                    <ion-card-header>
+                        <ion-card-title>Server</ion-card-title>
+                    </ion-card-header>
+                    <ion-card-content>
+                        Base URL: {{login.login.server}}<br>
+                        Token : {{login.login.token | shorten: 6}}...
+                        <ion-button (click)="copy(login.login.token)" size="small" color="secondary">
+                            <ion-icon name="clipboard-outline"></ion-icon>
+                        </ion-button>
+                    </ion-card-content>
+                </ion-card>
+            </ion-col>
+            <ion-col size="12" sizeMd="6">
+                <ion-card>
+                    <ion-card-header>
+                        <ion-card-title>System</ion-card-title>
+                    </ion-card-header>
+                    <ion-card-content>
+                        Server version: {{stats.version}}<br>
+                        System: {{stats.os}}<br>
+                        Docker: {{stats.docker}}
+                    </ion-card-content>
+                </ion-card>
+            </ion-col>
+            <ion-col size="12" sizeMd="6">
+                <ion-card>
+                    <ion-card-header>
+                        <ion-card-title>Memory</ion-card-title>
+                    </ion-card-header>
+                    <ion-card-content>
+                        Memory: {{stats.memoryUsed | filesize}} / {{stats.memoryTotal | filesize}}
+                        <ion-progress-bar [value]="stats.memoryUsed/stats.memoryTotal"></ion-progress-bar>
+                    </ion-card-content>
+                </ion-card>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
 
-  <ion-card>
-    <ion-card-header>
-      <ion-card-title>Memory</ion-card-title>
-    </ion-card-header>
-    <ion-card-content>
-      Memory: {{stats.usedMemory | filesize}} / {{stats.totalMemory | filesize}}
-      <ion-progress-bar [value]="stats.usedMemory/stats.totalMemory"></ion-progress-bar>
-    </ion-card-content>
-  </ion-card>
 
 </ion-content>
