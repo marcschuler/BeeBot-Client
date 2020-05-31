@@ -11,10 +11,12 @@ export class ModuleInfoComponent implements OnInit {
 
     @Input() worker: WorkerData;
 
-    moduleInfo:any;
-    moduleData:any;
+    moduleInfo: any;
 
-    expanded = false;
+    expanded: number = 0;
+    borderClass: any;
+
+    config: any;
 
     constructor(public rest: RestService,
                 public alertController: AlertController,
@@ -23,9 +25,25 @@ export class ModuleInfoComponent implements OnInit {
 
     ngOnInit() {
         console.log(JSON.stringify(this.worker))
-        this.rest.modulesWebValue(this.worker.moduleId).subscribe(i => this.moduleInfo=i);
-        this.rest.botModule(this.worker.botId,this.worker.id).subscribe(i => this.moduleData=i);
+        this.updateData();
+        this.rest.modulesWebValue(this.worker.moduleId).subscribe(i => this.moduleInfo = i);
+        this.rest.botModule(this.worker.botId,this.worker.id).subscribe(i => this.config=i);
     }
+
+    updateData() {
+        let newClass = "borderGreen";
+        const warnings = this.worker.logs.filter(log => log.type == "WARNING").length;
+        const errors = this.worker.logs.filter(log => log.type == "ERROR").length;
+
+        if (errors > 0)
+            newClass = "borderRed";
+        else if (warnings > 0)
+            newClass = "borderYellow"
+
+        console.log("Set class to " + newClass)
+        this.borderClass = newClass;
+    }
+
 
     delete() {
         this.alertController.create({

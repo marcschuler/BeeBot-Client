@@ -1,13 +1,16 @@
-<ion-grid>
+<ion-grid [className]="borderClass">
     <ion-row>
-        <ion-col size="10">
-        <h2>{{worker.name}}</h2>
+        <ion-col size="9">
+            <h2>{{worker.name}}</h2>
         </ion-col>
-        <ion-col size="2">
-            <ion-button [color]="expanded?'secondary':'light'" (click)="expanded=!expanded">
+        <ion-col size="3">
+            <ion-button [color]="expanded==2?'secondary':'light'" (click)="expanded=expanded==2?0:2">
+                <ion-icon name="document-text-outline"></ion-icon>
+            </ion-button>
+            <ion-button [color]="expanded==1?'secondary':'light'" (click)="expanded=expanded==1?0:1">
                 <ion-icon name="caret-down-circle-outline"></ion-icon>
             </ion-button>
-            <ion-button  (click)="delete()" color="light">
+            <ion-button (click)="delete()" color="light">
                 <ion-icon name="trash-outline" color="danger"></ion-icon>
             </ion-button>
         </ion-col>
@@ -17,9 +20,14 @@
             {{worker.description}}
         </ion-col>
     </ion-row>
-    <ion-row *ngIf="expanded">
-        <ion-col *ngIf="moduleInfo!=null && moduleData!=null">
-            <app-comp-generic [entries]="moduleInfo" [uid]="worker.botId" [object]="moduleData"></app-comp-generic>
+    <ion-row *ngIf="expanded==1">
+        <ion-col *ngIf="moduleInfo!=null && worker!=null">
+            <app-comp-generic [entries]="moduleInfo" [uid]="worker.botId" [object]="config"></app-comp-generic>
+        </ion-col>
+    </ion-row>
+    <ion-row *ngIf="expanded==2">
+        <ion-col size="12">
+            <app-logs [logs]="worker.logs"></app-logs>
         </ion-col>
     </ion-row>
 </ion-grid>

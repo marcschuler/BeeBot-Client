@@ -140,4 +140,12 @@ export class WorkerData{
     botId: string;
     name: string;
     description: string;
+
+    logs : LogEntry[];
+}
+
+export class LogEntry{
+    datetime: Date;
+    type: string;
+    message: string;
 }

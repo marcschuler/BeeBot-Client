@@ -20,8 +20,6 @@ export class BeebotPage implements OnInit {
     modulesList: string[] = [];
     logs:WebLog[] = [];
 
-    logTypes: string[] = ["INFO","WARNING","ERROR"];
-    selectedTypes:string[] = ["ERROR"]
 
     constructor(public route: ActivatedRoute, public router:Router,
                 public rest: RestService, public data:DataService,
@@ -37,14 +35,6 @@ export class BeebotPage implements OnInit {
         this.rest.get<ServerState>('beebot/' + this.uid).subscribe(s => { this.serverState = s;})
         this.rest.get<WebLog[]>('beebot/' + this.uid + '/logs').subscribe(s => {this.logs = s.reverse();})
         this.rest.botModules(this.uid).subscribe(s => this.worker = s);
-    }
-
-    logChange(type: string) {
-        if (this.selectedTypes.includes(type)){
-            this.selectedTypes.splice(this.selectedTypes.indexOf(type),1);
-        }else{
-            this.selectedTypes.push(type);
-        }
     }
 
     openActions(){

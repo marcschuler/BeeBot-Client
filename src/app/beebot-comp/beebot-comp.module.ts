@@ -5,16 +5,17 @@ import {IonicModule} from "@ionic/angular";
 import {FormsModule} from "@angular/forms";
 import {AppModule} from "../app.module";
 import {ViolationComponent} from "./violation/violation.component";
+import {LogsComponent} from "./logs/logs.component";
 
 
 @NgModule({
-    declarations: [CompGenericComponent, ViolationComponent],
+    declarations: [CompGenericComponent, ViolationComponent, LogsComponent],
     imports: [
         CommonModule,
         IonicModule,
         FormsModule
     ],
-    exports: [CompGenericComponent, ViolationComponent]
+    exports: [CompGenericComponent, ViolationComponent, LogsComponent]
 })
 export class BeebotCompModule {
 }
