@@ -30,3 +30,6 @@ npm-debug.log*
 /plugins
 /www
 /BeeBot-Client.iml
+/.firebaserc
+/firebase.json
+/.firebase/hosting.d3d3.cache
