@@ -1,7 +1,9 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {LoginService} from "../services/login.service";
 import {RestService} from "../services/rest.service";
-import {ToastController} from "@ionic/angular";
+import {ActionSheetController, AlertController, ToastController} from "@ionic/angular";
+import {Router} from "@angular/router";
+import {DataService} from "../services/data.service";
 
 @Component({
     selector: 'app-server-stats',
@@ -14,18 +16,23 @@ export class ServerStatsPage {
 
     interval: any;
 
-    constructor(public login: LoginService, public rest: RestService,public toast:ToastController) {
+    constructor(public login: LoginService, public rest: RestService,
+                public router: Router,
+                public data: DataService,
+                public toast: ToastController, public actionController: ActionSheetController,
+                public alertController: AlertController) {
     }
 
     ionViewWillEnter() {
-       this.reload();
-       this.interval=setInterval(()=>this.reload(),5000);
+        this.reload();
+        this.interval = setInterval(() => this.reload(), 5000);
     }
+
     ionViewWillLeave(): void {
         clearInterval(this.interval);
     }
 
-    reload(){
+    reload() {
         this.rest.get<ServerStats>('admin/stats').subscribe(s => {
             this.stats = s;
         });
@@ -46,8 +53,42 @@ export class ServerStatsPage {
         document.body.removeChild(selBox);
 
         this.toast.create({
-            message:'Copied to clipboard'
-        }).then(t=>t.present());
+            message: 'Copied to clipboard',
+            duration: 2000
+        }).then(t => t.present());
+    }
+
+
+    openActions() {
+        this.actionController.create({
+            header: 'Server',
+            buttons: [{
+                text: 'Change Server',
+                icon: 'create-outline',
+                handler: () => this.delete()
+            }]
+        }).then(a => a.present());
+    }
+
+    delete() {
+        this.alertController.create({
+            header: 'Change Server?',
+            subHeader: 'You can change back anytime',
+            buttons: [
+                {
+                    text: 'Cancel',
+                    role: 'cancel'
+                }, {
+                    text: 'Change',
+                    handler: () => {
+                        console.log('Deleting server ' + this.login.login.server);
+                        this.login.saveLogin(null);
+                        this.router.navigateByUrl('/overview');
+                        this.data.beebots=null;
+                    }
+                }
+            ]
+        }).then(a => a.present());
     }
 }
 

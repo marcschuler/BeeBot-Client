@@ -1,35 +1,41 @@
-<ion-list *ngFor="let entry of entries">
-    <ion-item>
-        <ion-label>{{entry.name}}</ion-label>
-        <ion-input *ngIf="entry.type =='String'" [(ngModel)]="object[entry.name]"
-                   [placeholder]="entry.defaultValue"></ion-input>
-        <ion-checkbox *ngIf="entry.type =='Boolean'" [(ngModel)]="object[entry.name]"></ion-checkbox>
-        <ion-input *ngIf="entry.type =='int'" type="number" [(ngModel)]="object[entry.name]"
-                   [placeholder]="entry.defaultValue"></ion-input>
+<div *ngIf="loaded">
+    <ion-list *ngFor="let entry of entries">
+        <ion-item>
+            <ion-label position="floating">{{entry.name}}</ion-label>
+            <ion-input *ngIf="entry.type =='String'" [(ngModel)]="object[entry.name]"
+                       [placeholder]="entry.defaultValue"></ion-input>
+            <ion-checkbox *ngIf="entry.type =='Boolean'" [(ngModel)]="object[entry.name]"></ion-checkbox>
+            <ion-input *ngIf="entry.type =='int'" type="number" [(ngModel)]="object[entry.name]"
+                       [placeholder]="entry.defaultValue"></ion-input>
 
-        <ion-select *ngIf="entry.type=='CHANNEL'" [(ngModel)]="object[entry.name]">
-            <ion-select-option *ngFor="let channel of channels " [value]="channel.id">
-                {{channel.name}}
-            </ion-select-option>
-        </ion-select>
+            <ion-select *ngIf="entry.type=='CHANNEL'" [(ngModel)]="object[entry.name]">
+                <ion-select-option *ngFor="let channel of channels " [value]="channel.id">
+                    {{channel.name}}
+                </ion-select-option>
+            </ion-select>
 
-        <ion-select *ngIf="entry.type=='CLIENT'" [(ngModel)]="object[entry.name]">
-            <ion-select-option *ngFor="let channel of channels " [value]="channel.id">
-                {{channel.name}}
-            </ion-select-option>
-        </ion-select>
+            <ion-select *ngIf="entry.type=='CLIENT'" [(ngModel)]="object[entry.name]">
+                <ion-select-option *ngFor="let channel of channels " [value]="channel.id">
+                    {{channel.name}}
+                </ion-select-option>
+            </ion-select>
 
-        <ion-select *ngIf="entry.type=='CHANNEL_GROUP'" [(ngModel)]="object[entry.name]">
-            <ion-select-option *ngFor="let group of groupsChannel " [value]="group.id">
-                {{group.name}}
-            </ion-select-option>
-        </ion-select>
+            <ion-select *ngIf="entry.type=='CHANNEL_GROUP'" [(ngModel)]="object[entry.name]">
+                <ion-select-option *ngFor="let group of groupsChannel " [value]="group.id">
+                    {{group.name}}
+                </ion-select-option>
+            </ion-select>
 
 
-        <ion-select *ngIf="entry.type=='SERVER_GROUP'" [(ngModel)]="object[entry.name]">
-            <ion-select-option *ngFor="let group of groupsServer " [value]="group.id">
-                {{group.name}}
-            </ion-select-option>
-        </ion-select>
-    </ion-item>
-</ion-list>
+            <ion-select *ngIf="entry.type=='SERVER_GROUP'" [(ngModel)]="object[entry.name]">
+                <ion-select-option *ngFor="let group of groupsServer " [value]="group.id">
+                    {{group.name}}
+                </ion-select-option>
+            </ion-select>
+        </ion-item>
+    </ion-list>
+</div>
+
+<div *ngIf="!loaded">
+    <ion-spinner></ion-spinner>
+</div>

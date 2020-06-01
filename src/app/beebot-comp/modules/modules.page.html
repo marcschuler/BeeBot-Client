@@ -10,23 +10,23 @@
 <ion-content>
     <ion-item>
         <ion-label>Select the Bot</ion-label>
-        <ion-select (ionChange)="selectBot($event)">
+        <ion-select (ionChange)="selectBot($event)" [(ngModel)]="selectedBot">
             <ion-select-option *ngFor="let bot of bots" [value]="bot">
                 {{bot.teamspeakConfig.name}}
             </ion-select-option>
         </ion-select>
     </ion-item>
 
-<div *ngIf="selectedBot!=null">
-    <br>
-    <ion-button *ngFor="let module of modules" (click)="select(module)"
-                [color]="selectedModule == module?'primary':'light'">
-        {{module.name}}
-    </ion-button>
+    <div *ngIf="selectedBot!=null">
+        <br>
+        <ion-button *ngFor="let module of modules" (click)="select(module)"
+                    [color]="selectedModule == module?'primary':'light'">
+            {{module.name}}
+        </ion-button>
 
-    <app-comp-generic [entries]="definition" [object]="moduleConfig"  [uid]="selectedBot.id"></app-comp-generic>
-    <ion-button expand="block" (click)="create()">Create</ion-button>
+        <app-comp-generic [entries]="definition" [object]="moduleConfig" [uid]="selectedBot.id"></app-comp-generic>
+        <ion-button expand="block" (click)="create()">Create</ion-button>
 
-    <app-violation [violations]="violations"></app-violation>
-</div>
+        <app-violation [violations]="violations"></app-violation>
+    </div>
 </ion-content>

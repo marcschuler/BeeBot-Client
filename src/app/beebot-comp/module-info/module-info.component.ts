@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {RestService, WorkerData} from "../../services/rest.service";
+import {RestService, Violation, WorkerData} from "../../services/rest.service";
 import {AlertController, ToastController} from "@ionic/angular";
 
 @Component({
@@ -17,6 +17,7 @@ export class ModuleInfoComponent implements OnInit {
     borderClass: any;
 
     config: any;
+    violations: Violation[];
 
     constructor(public rest: RestService,
                 public alertController: AlertController,
@@ -24,10 +25,13 @@ export class ModuleInfoComponent implements OnInit {
     }
 
     ngOnInit() {
-        console.log(JSON.stringify(this.worker))
+        this.update();
+    }
+
+    update() {
         this.updateData();
         this.rest.modulesWebValue(this.worker.moduleId).subscribe(i => this.moduleInfo = i);
-        this.rest.botModule(this.worker.botId,this.worker.id).subscribe(i => this.config=i);
+        this.rest.botModuleConfig(this.worker.botId, this.worker.id).subscribe(i => this.config = i);
     }
 
     updateData() {
@@ -40,7 +44,6 @@ export class ModuleInfoComponent implements OnInit {
         else if (warnings > 0)
             newClass = "borderYellow"
 
-        console.log("Set class to " + newClass)
         this.borderClass = newClass;
     }
 
@@ -66,5 +69,15 @@ export class ModuleInfoComponent implements OnInit {
                 }
             ]
         }).then(a => a.present());
+    }
+
+    saveConfig() {
+        this.rest.botModuleConfigChange(this.worker.botId, this.worker.id, this.config)
+            .subscribe((vio) => {
+                this.violations = vio;
+                if (vio.length == 0) {
+                    this.update();
+                }
+            });
     }
 }

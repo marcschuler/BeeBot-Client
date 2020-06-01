@@ -27,6 +27,8 @@ export class ModulesPage implements OnInit {
     ngOnInit() {
         this.rest.get<ServerState[]>('beebot').subscribe(s => {
             this.bots = s;
+            if(s.length>0)
+                this.selectedBot = s[0];
         })
         this.rest.get<ModuleDefinition[]>('modules/list').subscribe(s => {
             this.modules = s;

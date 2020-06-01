@@ -7,8 +7,8 @@
         <ion-row>
           <ion-col size="1">
             <ion-icon *ngIf="log.type=='INFO'"></ion-icon>
-            <ion-icon *ngIf="log.type=='WARNING'" color="warning"></ion-icon>
-            <ion-icon *ngIf="log.type=='ERROR'" color="danger" name="warning-outline"></ion-icon>
+            <ion-icon *ngIf="log.type=='WARNING'" color="warning" name="alert-circle-outline"></ion-icon>
+            <ion-icon *ngIf="log.type=='ERROR'" color="danger" name="warning-filled"></ion-icon>
           </ion-col>
           <ion-col size="2">{{log.datetime | date: 'HH:mm:ss'}}</ion-col>
           <ion-col size="9">{{log.message}}</ion-col>

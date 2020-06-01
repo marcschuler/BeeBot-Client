@@ -8,25 +8,39 @@
 </ion-header>
 
 <ion-content>
+<ion-grid>
+    <ion-row>
+        <ion-col size="12" sizeXl="6" *ngIf="login.login==null">
+            <ion-card>
+                <ion-card-header>
+                    <ion-card-title>Login</ion-card-title>
+                </ion-card-header>
+                <ion-card-content>
+                    You need to login to use BeeBot. Click <a [routerLink]="['/server-add']">here</a> to login
+                </ion-card-content>
+            </ion-card>
+        </ion-col>
 
-    <ion-card *ngIf="login.login==null">
-        <ion-card-header>
-            <ion-card-title>Login</ion-card-title>
-        </ion-card-header>
-        <ion-card-content>
-            You need to login to use BeeBot. Click <a [routerLink]="['/server-add']">here</a> to login
-        </ion-card-content>
-    </ion-card>
-
-
-    <ion-card>
-        <ion-card-header>
-            <ion-card-subtitle>May 2020</ion-card-subtitle>
-            <ion-card-title>Changelog</ion-card-title>
-        </ion-card-header>
-        <ion-card-content>
-            <p>+ Added basic functionality</p>
-        </ion-card-content>
-    </ion-card>
+        <ion-col size="12" sizeXl="6">
+            <ion-card>
+                <ion-card-header>
+                    <ion-card-subtitle>v{{changelogs[selectedChangelog].version}}</ion-card-subtitle>
+                    <ion-card-title>{{changelogs[selectedChangelog].date}} Changelog</ion-card-title>
+                    <ion-card-content>
+                        <p *ngFor="let entry of changelogs[selectedChangelog].entries">{{entry}}</p>
+                        <ion-buttons slot="end">
+                            <ion-button [disabled]="selectedChangelog==changelogs.length-1" (click)="nextChangelog()">
+                                <ion-icon name="chevron-back-outline"></ion-icon>
+                            </ion-button>
+                            <ion-button [disabled]="selectedChangelog==0" (click)="lastChangelog()">
+                                <ion-icon name="chevron-forward-outline"></ion-icon>
+                            </ion-button>
+                        </ion-buttons>
+                    </ion-card-content>
+                </ion-card-header>
+            </ion-card>
+        </ion-col>
+    </ion-row>
+</ion-grid>
 
 </ion-content>

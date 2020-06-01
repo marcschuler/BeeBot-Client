@@ -12,46 +12,6 @@ import {isArray} from "util";
 })
 export class BeebotAddPage implements OnInit {
 
-
-    entries: Entry[] = [
-        {
-            name: 'name',
-            type: 'String',
-            defaultValue: 'Server name',
-            description: ''
-        },
-        {
-            name: 'host',
-            type: 'String',
-            defaultValue: '127.0.0.1',
-            description: 'The Teamspeak servers IP address'
-        }, {
-            name: 'username',
-            type: 'String',
-            defaultValue: 'serveradmin',
-            description: ''
-        }, {
-            name: 'password',
-            type: 'String',
-            defaultValue: '',
-            description: ''
-        }, {
-            name: 'virtualServer',
-            description: '',
-            defaultValue: '1',
-            type: 'int'
-        }, {
-            name: 'flood',
-            type: 'Boolean',
-            defaultValue: 'false',
-            description: ''
-        }, {
-            name: 'nickname',
-            description: '',
-            defaultValue: 'BeeBot@karlthebee',
-            type: 'String'
-        }
-    ]
     teamspeakConfig: TeamspeakConfig = new TeamspeakConfig();
 
 

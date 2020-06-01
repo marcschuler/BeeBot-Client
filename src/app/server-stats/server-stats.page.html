@@ -4,6 +4,11 @@
             <ion-menu-button></ion-menu-button>
         </ion-buttons>
         <ion-title>Server Status</ion-title>
+        <ion-buttons slot="end">
+            <ion-button (click)="openActions()">
+                <ion-icon name="ellipsis-vertical-outline"></ion-icon>
+            </ion-button>
+        </ion-buttons>
     </ion-toolbar>
 </ion-header>
 
@@ -15,7 +20,7 @@
                     <ion-card-header>
                         <ion-card-title>Server</ion-card-title>
                     </ion-card-header>
-                    <ion-card-content>
+                    <ion-card-content *ngIf="login.login">
                         Base URL: {{login.login.server}}<br>
                         Token : {{login.login.token | shorten: 6}}...
                         <ion-button (click)="copy(login.login.token)" size="small" color="secondary">

@@ -21,11 +21,13 @@ export class CompGenericComponent implements OnInit, OnChanges {
     groupsServer: GroupReference[] = [];
     groupsChannel: GroupReference[] = [];
 
+
+    loaded = false;
+
     constructor(public rest: RestService) {
     }
 
     ngOnInit() {
-        this.update();
     }
 
     @Input()
@@ -33,7 +35,8 @@ export class CompGenericComponent implements OnInit, OnChanges {
         if (uid == this._uid)
             return;
         this._uid = uid;
-        this.update();
+        if (uid != undefined)
+            this.update();
     }
 
     get uid(): string {
@@ -41,10 +44,9 @@ export class CompGenericComponent implements OnInit, OnChanges {
     }
 
     ngOnChanges(changes: SimpleChanges): void {
-        this.ngOnInit();
     }
 
-    update() {
+    async update() {
         console.log("loading comp data for Bot " + this.uid)
         this.channels = [];
         this.clients = [];
@@ -52,10 +54,15 @@ export class CompGenericComponent implements OnInit, OnChanges {
         this.groupsChannel = [];
 
         if (this.uid != null) {
-            this.rest.botChannels(this.uid).subscribe(c => this.channels = c);
-            this.rest.botClients(this.uid).subscribe(c => this.clients = c);
-            this.rest.botGroupsServer(this.uid).subscribe(g => this.groupsServer = g);
-            this.rest.botGroupsChannel(this.uid).subscribe(g => this.groupsChannel = g);
+            this.loaded = false;
+            Promise.all([
+                this.rest.botChannels(this.uid).toPromise().then(c => this.channels = c),
+                this.rest.botClients(this.uid).toPromise().then(c => this.clients = c),
+                this.rest.botGroupsServer(this.uid).toPromise().then(g => this.groupsServer = g),
+                this.rest.botGroupsChannel(this.uid).toPromise().then(g => this.groupsChannel = g)
+            ]).then(() => this.loaded = true);
+        } else {
+            this.loaded = true;
         }
     }
 

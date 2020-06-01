@@ -18,7 +18,7 @@
                 <ion-list id="labels-list">
                     <ion-list-header>BeeBots
                     </ion-list-header>
-                    <ion-spinner *ngIf="!data.beebots"></ion-spinner>
+                    <ion-spinner *ngIf="!data.beebots && login.login"></ion-spinner>
 
                     <ion-item *ngFor="let beebot of (data.beebots?data.beebots:[])" lines="none"
                               [routerLink]="['/beebot/' + beebot.id]">

@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import {RestService} from "./rest.service";
 import {LoginService, ServerState} from "./login.service";
+import {Entry} from "../beebot-comp/generic-comp.service";
 
 @Injectable({
     providedIn: 'root'
@@ -8,6 +9,48 @@ import {LoginService, ServerState} from "./login.service";
 export class DataService {
 
     beebots: ServerState[];
+
+
+
+    BEEBOT_CONFIG: Entry[] = [
+        {
+            name: 'name',
+            type: 'String',
+            defaultValue: 'Server name',
+            description: ''
+        },
+        {
+            name: 'host',
+            type: 'String',
+            defaultValue: '127.0.0.1',
+            description: 'The Teamspeak servers IP address'
+        }, {
+            name: 'username',
+            type: 'String',
+            defaultValue: 'serveradmin',
+            description: ''
+        }, {
+            name: 'password',
+            type: 'String',
+            defaultValue: '',
+            description: ''
+        }, {
+            name: 'virtualServer',
+            description: '',
+            defaultValue: '1',
+            type: 'int'
+        }, {
+            name: 'flood',
+            type: 'Boolean',
+            defaultValue: 'false',
+            description: ''
+        }, {
+            name: 'nickname',
+            description: '',
+            defaultValue: 'BeeBot@karlthebee',
+            type: 'String'
+        }
+    ]
 
     constructor(public rest: RestService,public login:LoginService) {
         setTimeout(()=>this.reloadBeeBots(),2500);

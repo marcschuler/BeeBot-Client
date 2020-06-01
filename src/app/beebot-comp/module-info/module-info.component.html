@@ -10,9 +10,6 @@
             <ion-button [color]="expanded==1?'secondary':'light'" (click)="expanded=expanded==1?0:1">
                 <ion-icon name="caret-down-circle-outline"></ion-icon>
             </ion-button>
-            <ion-button (click)="delete()" color="light">
-                <ion-icon name="trash-outline" color="danger"></ion-icon>
-            </ion-button>
         </ion-col>
     </ion-row>
     <ion-row>
@@ -22,7 +19,12 @@
     </ion-row>
     <ion-row *ngIf="expanded==1">
         <ion-col *ngIf="moduleInfo!=null && worker!=null">
-            <app-comp-generic [entries]="moduleInfo" [uid]="worker.botId" [object]="config"></app-comp-generic>
+            <app-comp-generic [entries]="moduleInfo" [uid]="worker.botId" [object]="config" [errors]="violations"></app-comp-generic>
+            <ion-button (click)="saveConfig()">Save</ion-button>
+            <ion-button (click)="delete()" color="light">
+                <ion-icon name="trash-outline" color="danger"></ion-icon>
+                Delete
+            </ion-button>
         </ion-col>
     </ion-row>
     <ion-row *ngIf="expanded==2">
