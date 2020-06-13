@@ -10,6 +10,13 @@ export class OverviewPage implements OnInit {
 
   changelogs = [
     {
+      version:'0.6.1',
+      date:'June 2020',
+      entries: [
+        "+ Fixed UI Bug"
+      ]
+    },
+    {
       version:'0.6.0',
       date:'June 2020',
       entries: [

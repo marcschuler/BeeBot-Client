@@ -22,7 +22,7 @@ export class CompGenericComponent implements OnInit, OnChanges {
     groupsChannel: GroupReference[] = [];
 
 
-    loaded = false;
+    loaded = true;
 
     constructor(public rest: RestService) {
     }
