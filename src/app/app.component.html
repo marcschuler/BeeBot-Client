@@ -8,25 +8,16 @@
 
                     <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages; let i = index">
                         <ion-item (click)="selectedIndex = i" routerDirection="root" [routerLink]="[p.url]" lines="none"
-                                  detail="false" [class.selected]="selectedIndex == i" [disabled]="p.onlyLogin && login.login==null">
+                                  detail="false" [class.selected]="selectedIndex == i"
+                                  [disabled]="p.onlyLogin && login.login==null">
                             <ion-icon slot="start" [ios]="p.icon + '-outline'" [md]="p.icon + '-sharp'"></ion-icon>
                             <ion-label>{{ p.title }}</ion-label>
                         </ion-item>
                     </ion-menu-toggle>
                 </ion-list>
 
-                <ion-list id="labels-list">
-                    <ion-list-header>BeeBots
-                    </ion-list-header>
-                    <ion-spinner *ngIf="!data.beebots && login.login"></ion-spinner>
+                <app-bot-list></app-bot-list>
 
-                    <ion-item *ngFor="let beebot of (data.beebots?data.beebots:[])" lines="none"
-                              [routerLink]="['/beebot/' + beebot.id]">
-                        <ion-icon slot="start" ios="bookmark-outline" md="bookmark-sharp"></ion-icon>
-                        <ion-label>{{ beebot.teamspeakConfig.name}} ({{beebot.id | uppercase | shorten: 4}})</ion-label>
-                        <ion-badge *ngIf="!beebot.online" color="danger">Offline</ion-badge>
-                    </ion-item>
-                </ion-list>
                 <ion-button expand="full" [routerLink]="['/beebot-add']">Add BeeBot</ion-button>
             </ion-content>
         </ion-menu>

@@ -1,54 +1,54 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 
-import { Platform } from '@ionic/angular';
-import { SplashScreen } from '@ionic-native/splash-screen/ngx';
-import { StatusBar } from '@ionic-native/status-bar/ngx';
-import {LoginService} from "./services/login.service";
-import {DataService} from "./services/data.service";
+import {Platform} from '@ionic/angular';
+import {SplashScreen} from '@ionic-native/splash-screen/ngx';
+import {StatusBar} from '@ionic-native/status-bar/ngx';
+import {LoginService} from './services/login.service';
+import {DataService} from './services/data.service';
 
 @Component({
-  selector: 'app-root',
-  templateUrl: 'app.component.html',
-  styleUrls: ['app.component.scss']
+    selector: 'app-root',
+    templateUrl: 'app.component.html',
+    styleUrls: ['app.component.scss']
 })
 export class AppComponent implements OnInit {
-  public selectedIndex;
-  public appPages = [ {
-    title: 'Overview',
-    url: '/overview',
-    icon: 'home',
-    onlyLogin: false
-  },
-    {
-      title: 'Server',
-      url: '/server',
-      icon: 'server',
-      onlyLogin: true
+    public selectedIndex;
+    public appPages = [{
+        title: 'Overview',
+        url: '/overview',
+        icon: 'home',
+        onlyLogin: false
     },
+        {
+            title: 'Server',
+            url: '/server',
+            icon: 'server',
+            onlyLogin: true
+        },
 
-  ];
+    ];
 
-  constructor(
-    private platform: Platform,
-    private splashScreen: SplashScreen,
-    private statusBar: StatusBar,
-    public login:LoginService,
-    public data:DataService
-  ) {
-    this.initializeApp();
-  }
-
-  initializeApp() {
-    this.platform.ready().then(() => {
-      this.statusBar.styleDefault();
-      this.splashScreen.hide();
-    });
-  }
-
-  ngOnInit() {
-    const path = window.location.pathname.split('folder/')[1];
-    if (path !== undefined) {
-      this.selectedIndex = this.appPages.findIndex(page => page.title.toLowerCase() === path.toLowerCase());
+    constructor(
+        private platform: Platform,
+        private splashScreen: SplashScreen,
+        private statusBar: StatusBar,
+        public login: LoginService,
+        public data: DataService
+    ) {
+        this.initializeApp();
     }
-  }
+
+    initializeApp() {
+        this.platform.ready().then(() => {
+            this.statusBar.styleDefault();
+            this.splashScreen.hide();
+        });
+    }
+
+    ngOnInit() {
+        const path = window.location.pathname.split('folder/')[1];
+        if (path !== undefined) {
+            this.selectedIndex = this.appPages.findIndex(page => page.title.toLowerCase() === path.toLowerCase());
+        }
+    }
 }

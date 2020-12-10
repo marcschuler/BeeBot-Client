@@ -1,0 +1,29 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-title>Clients</ion-title>
+        <ion-buttons slot="end">
+            <ion-button (click)="reload()">
+                <ion-icon name="reload-outline"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-spinner *ngIf="!clients"></ion-spinner>
+    <ion-list>
+        <ion-item *ngFor="let client of clients" class="ion-text-wrap">
+            <ion-label>
+                {{client.countryFlag}}
+                <b class="ion-margin-start">{{client.nickname}}</b>
+                <ion-badge *ngIf="client.query" class="ion-margin-start">Query</ion-badge>
+                <p>{{client.ip}} on {{client.platform}}</p>
+            </ion-label>
+            <!-- <ion-buttons slot="end">
+                 <ion-button>kick</ion-button>
+             </ion-buttons>-->
+
+        </ion-item>
+    </ion-list>
+
+</ion-content>

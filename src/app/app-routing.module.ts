@@ -30,7 +30,17 @@ const routes: Routes = [
   {
     path: 'overview',
     loadChildren: () => import('./overview/overview.module').then( m => m.OverviewPageModule)
+  },
+  {
+    path: 'beebot/:uid/clients',
+    loadChildren: () => import('./pages/bee-bot-clients/bee-bot-clients.module').then( m => m.BeeBotClientsPageModule)
+  },
+  {
+    path: 'beebot/:uid/stats',
+    loadChildren: () => import('./pages/bee-bot-graphs/bee-bot-graphs.module').then( m => m.BeeBotGraphsPageModule)
   }
+
+
 ];
 
 @NgModule({

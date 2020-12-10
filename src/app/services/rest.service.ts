@@ -1,9 +1,9 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from "@angular/common/http";
-import {LoginService, Login, TeamspeakConfig} from "./login.service";
-import {Observable} from "rxjs";
-import {ToastController} from "@ionic/angular";
-import {share} from "rxjs/operators";
+import {HttpClient} from '@angular/common/http';
+import {LoginService, Login, TeamspeakConfig} from './login.service';
+import {Observable} from 'rxjs';
+import {ToastController} from '@ionic/angular';
+import {share} from 'rxjs/operators';
 
 @Injectable({
     providedIn: 'root'
@@ -12,6 +12,10 @@ export class RestService {
 
     constructor(private httpClient: HttpClient, private login: LoginService, private toast: ToastController) {
 
+    }
+
+    public botClientsDto(bid: string): Observable<ClientDTO[]> {
+        return this.get('beebot/' + bid + '/clients/dto');
     }
 
     public botClients(bid: string): Observable<ClientReference[]> {
@@ -36,7 +40,7 @@ export class RestService {
     }
 
     botModules(bid: string): Observable<WorkerData[]> {
-        return this.get('beebot/' + bid + '/modules')
+        return this.get('beebot/' + bid + '/modules');
     }
 
     botModule(bid: string, mid: string): Observable<WorkerData> {
@@ -63,26 +67,27 @@ export class RestService {
         return this.get<TeamspeakConfig>('beebot/' + uid + '/config');
     }
 
-    botConfigChange(uid: string, config: any):Observable<Violation[]> {
+    botConfigChange(uid: string, config: any): Observable<Violation[]> {
         return this.put<Violation[]>('beebot/' + uid + '/config', config);
     }
 
 
     public get<T>(name: string, login: Login = null): Observable<T> {
-        if (login == null)
+        if (login == null) {
             login = this.login.login;
+        }
         if (login == null) {
             login = new Login();
-            this.onError("You are not logged in");
+            this.onError('You are not logged in');
         }
         // console.log("WEB GET " + this.genURL(name, login))
-        const http = this.httpClient.get<T>(login.server + "/" + name, {
+        const http = this.httpClient.get<T>(login.server + '/' + name, {
             params: {
                 token: login.token
             }
-        }).pipe(share())
+        }).pipe(share());
         http.subscribe(() => {
-        }, e => this.onError(e))
+        }, e => this.onError(e));
         return http;
     }
 
@@ -90,30 +95,30 @@ export class RestService {
         let login = this.login.login;
         if (login == null) {
             login = new Login();
-            this.onError("You are not logged in");
+            this.onError('You are not logged in');
         }
         // console.log("WEB PUT " + this.genURL(name, login))
         const http = this.httpClient.put<T>(this.genURL(name, this.login.login), data, {
             params: {
                 token: login.token
             }
-        }).pipe(share())
-        http.subscribe(()=>{}, e => this.onError(e))
+        }).pipe(share());
+        http.subscribe(() => {
+        }, e => this.onError(e));
         return http;
     }
 
 
     delete<T>(name: string): Observable<T> {
-        let login = this.login.login;
+        const login = this.login.login;
 
-        //console.log("WEB DEL " + this.genURL(name, login))
         const http = this.httpClient.delete<T>(this.genURL(name, login), {
             params: {
                 token: login.token
             }
-        }).pipe(share())
+        }).pipe(share());
         http.subscribe(() => {
-        }, e => this.onError(e))
+        }, e => this.onError(e));
         return http;
     }
 
@@ -128,14 +133,15 @@ export class RestService {
     private genURL(name, login: Login) {
         if (login == null) {
             login = new Login();
-            this.onError("You are not logged in");
+            this.onError('You are not logged in');
         }
-        return login.server + "/" + name;
+        return login.server + '/' + name;
     }
 
     public errorText(e): string {
-        if (e.statusText !== null)
-            return e.status + " " + e.statusText;
+        if (e.statusText !== null) {
+            return e.status + ' ' + e.statusText;
+        }
 
         return e;
     }
@@ -153,6 +159,19 @@ export class ClientReference {
     name: string;
 }
 
+export class ClientDTO {
+    id: number;
+    nickname: string;
+    query: boolean;
+
+    ip: string;
+    platform: string;
+    version: string;
+    country: string;
+    countryFlag: string;
+    afk: boolean;
+}
+
 export class GroupReference {
     id: number;
     name: string;
@@ -160,7 +179,7 @@ export class GroupReference {
 
 export class Violation {
     path: string;
-    violation: string
+    violation: string;
 }
 
 export class WorkerData {

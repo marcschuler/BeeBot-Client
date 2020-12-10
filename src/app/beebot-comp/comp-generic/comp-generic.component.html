@@ -4,7 +4,7 @@
             <ion-label position="floating">{{entry.name}}</ion-label>
             <ion-input *ngIf="entry.type =='String'" [(ngModel)]="object[entry.name]"
                        [placeholder]="entry.defaultValue"></ion-input>
-            <ion-checkbox *ngIf="entry.type =='Boolean'" [(ngModel)]="object[entry.name]"></ion-checkbox>
+            <ion-checkbox *ngIf="entry.type =='boolean'" [(ngModel)]="object[entry.name]"></ion-checkbox>
             <ion-input *ngIf="entry.type =='int'" type="number" [(ngModel)]="object[entry.name]"
                        [placeholder]="entry.defaultValue"></ion-input>
 

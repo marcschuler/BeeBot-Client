@@ -1,0 +1,25 @@
+<ion-list id="labels-list">
+    <ion-list-header>BeeBots
+    </ion-list-header>
+    <ion-spinner *ngIf="!data.beebots && login.login"></ion-spinner>
+
+    <span *ngFor="let beebot of (data.beebots?data.beebots:[])">
+
+    <ion-item lines="none"
+              [routerLink]="['/beebot/' + beebot.id]" (click)="selectedBotId = beebot.id">
+  <ion-icon slot="start" ios="bookmark-outline" md="bookmark-sharp"></ion-icon>
+  <ion-label>{{ beebot.teamspeakConfig.name}} ({{beebot.id | uppercase | shorten: 4}})</ion-label>
+  <ion-badge *ngIf="!beebot.online" color="danger">Offline</ion-badge>
+</ion-item>
+<span *ngIf="selectedBotId==beebot.id">
+                        <ion-item [routerLink]="['/beebot/' + beebot.id + '/clients']" class="subitem">
+                            <ion-icon slot="start" name="people-circle-outline"></ion-icon>
+                            Clients
+                        </ion-item>
+     <ion-item [routerLink]="['/beebot/' + beebot.id + '/stats']" class="subitem">
+                            <ion-icon slot="start" name="pie-chart-outline"></ion-icon>
+                            Stats
+                        </ion-item>
+                            </span>
+  </span>
+</ion-list>
