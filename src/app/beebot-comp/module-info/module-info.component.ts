@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {RestService, Violation, WorkerData} from "../../services/rest.service";
-import {AlertController, ToastController} from "@ionic/angular";
+import {RestService, Violation, WorkerData} from '../../services/rest.service';
+import {AlertController, ToastController} from '@ionic/angular';
 
 @Component({
     selector: 'app-module-info',
@@ -13,7 +13,7 @@ export class ModuleInfoComponent implements OnInit {
 
     moduleInfo: any;
 
-    expanded: number = 0;
+    expanded = 0;
     borderClass: any;
 
     config: any;
@@ -35,14 +35,15 @@ export class ModuleInfoComponent implements OnInit {
     }
 
     updateData() {
-        let newClass = "borderGreen";
-        const warnings = this.worker.logs.filter(log => log.type == "WARNING").length;
-        const errors = this.worker.logs.filter(log => log.type == "ERROR").length;
+        let newClass = 'borderGreen';
+        const warnings = this.worker.logs.filter(log => log.type == 'WARNING').length;
+        const errors = this.worker.logs.filter(log => log.type == 'ERROR').length;
 
-        if (errors > 0)
-            newClass = "borderRed";
-        else if (warnings > 0)
-            newClass = "borderYellow"
+        if (errors > 0) {
+            newClass = 'borderRed';
+        } else if (warnings > 0) {
+            newClass = 'borderYellow';
+        }
 
         this.borderClass = newClass;
     }
@@ -62,7 +63,8 @@ export class ModuleInfoComponent implements OnInit {
                         console.log('Deleting module' + this.worker.id);
                         this.rest.botModulesDelete(this.worker.botId, this.worker.id).subscribe(s => {
                             this.toastController.create({
-                                message: 'Module deleted'
+                                message: 'Module deleted',
+                                duration: 3000
                             }).then(t => t.present());
                         });
                     }
@@ -77,6 +79,10 @@ export class ModuleInfoComponent implements OnInit {
                 this.violations = vio;
                 if (vio.length == 0) {
                     this.update();
+                    this.toastController.create({
+                        duration: 3000,
+                        message: 'Configuration saved'
+                    }).then(t => t.present());
                 }
             });
     }

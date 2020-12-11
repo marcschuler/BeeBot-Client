@@ -1,6 +1,6 @@
 import {Component, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
-import {Entry} from "../generic-comp.service";
-import {ChannelReference, ClientReference, GroupReference, RestService} from "../../services/rest.service";
+import {Entry} from '../generic-comp.service';
+import {ChannelReference, ClientReference, GroupReference, RestService} from '../../services/rest.service';
 
 @Component({
     selector: 'app-comp-generic',
@@ -10,7 +10,7 @@ import {ChannelReference, ClientReference, GroupReference, RestService} from "..
 export class CompGenericComponent implements OnInit, OnChanges {
 
     @Input() entries: any[] = [];
-    @Input() errors: any[] = []; //we want the path
+    @Input() errors: any[] = []; // we want the path
     @Input() object: any = {};
 
     _uid: string;
@@ -32,22 +32,24 @@ export class CompGenericComponent implements OnInit, OnChanges {
 
     @Input()
     set uid(uid: string) {
-        if (uid == this._uid)
+        if (uid == this._uid) {
             return;
+        }
         this._uid = uid;
-        if (uid != undefined)
+        if (uid != undefined) {
             this.update();
+        }
     }
 
     get uid(): string {
-        return this._uid
+        return this._uid;
     }
 
     ngOnChanges(changes: SimpleChanges): void {
     }
 
     async update() {
-        console.log("loading comp data for Bot " + this.uid)
+        console.log('loading comp data for Bot ' + this.uid);
         this.channels = [];
         this.clients = [];
         this.groupsServer = [];

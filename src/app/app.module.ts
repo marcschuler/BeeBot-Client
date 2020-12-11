@@ -8,10 +8,10 @@ import {StatusBar} from '@ionic-native/status-bar/ngx';
 
 import {AppComponent} from './app.component';
 import {AppRoutingModule} from './app-routing.module';
-import {IonicStorageModule} from "@ionic/storage";
-import {RestService} from "./services/rest.service";
-import {HttpClientModule} from "@angular/common/http";
-import {ServicesModule} from "./services/services.module";
+import {IonicStorageModule} from '@ionic/storage';
+import {RestService} from './services/rest.service';
+import {HttpClientModule} from '@angular/common/http';
+import {ServicesModule} from './services/services.module';
 import {ComponentsModule} from './components/components.module';
 
 @NgModule({

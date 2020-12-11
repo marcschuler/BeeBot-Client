@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
-import {RestService} from "./rest.service";
-import {LoginService, ServerState} from "./login.service";
-import {Entry} from "../beebot-comp/generic-comp.service";
+import {RestService} from './rest.service';
+import {LoginService, ServerState} from './login.service';
+import {Entry} from '../beebot-comp/generic-comp.service';
 
 @Injectable({
     providedIn: 'root'
@@ -50,24 +50,24 @@ export class DataService {
             defaultValue: 'BeeBot@karlthebee',
             type: 'String'
         }
-    ]
+    ];
 
-    constructor(public rest: RestService,public login:LoginService) {
-        setTimeout(()=>this.reloadBeeBots(),2500);
+    constructor(public rest: RestService, public login: LoginService) {
+        setTimeout(() => this.reloadBeeBots(), 2500);
     }
 
     reloadBeeBots() {
-        if (this.login.login==null){
-            setTimeout(()=>this.reloadBeeBots(),5000);
+        if (this.login.login == null){
+            setTimeout(() => this.reloadBeeBots(), 5000);
             return;
         }
-        console.log("Reloading BeeBots");
+        console.log('Reloading BeeBots');
         this.rest.get<ServerState[]>('beebot').subscribe(e => {
             this.beebots = e;
-            console.log("Got " + e.length + " BeeBots");
-        },e=>{
-            setTimeout(()=>this.reloadBeeBots(),5000);
-        })
+            console.log('Got ' + e.length + ' BeeBots');
+        }, e => {
+            setTimeout(() => this.reloadBeeBots(), 5000);
+        });
     }
 
 

@@ -32,17 +32,17 @@ export class BeeBotGraphsPage implements OnInit {
     }
 
     reloadCharts() {
-        //data per country
+        // data per country
         const countryData = this.prepareSimpleChartData(this.clients.map(c => c.country).sort());
         this.generatePieChart('stat-country', countryData);
 
-        //data per platform
+        // data per platform
         const platformData = this.prepareSimpleChartData(this.clients.map(c => c.platform).sort());
         this.generatePieChart('stat-platform', platformData);
 
-        //data per version
+        // data per version
         const versionData = this.prepareSimpleChartData(this.clients.map(c => {
-            const version = c.version; //Remove "[build 123456789]" after version tag
+            const version = c.version; // Remove "[build 123456789]" after version tag
             return (version.indexOf('Build') !== -1 ? version.substr(0, version.indexOf(' ')) : version);
         }).sort());
         this.generatePieChart('stat-version', versionData);

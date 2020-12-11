@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {Storage} from "@ionic/storage";
+import {Storage} from '@ionic/storage';
 
 
 export class Login {
@@ -18,8 +18,8 @@ export class TeamspeakConfig {
     host: string;
     username: string;
     password: string;
-    virtualServer: number = 1;
-    flood: boolean = false;
+    virtualServer = 1;
+    flood = false;
     nickname: string;
 }
 
@@ -38,14 +38,14 @@ export class LoginService {
     }
 
     async init() {
-        //this.login = JSON.parse(localStorage.getItem('login'));
+        // this.login = JSON.parse(localStorage.getItem('login'));
         this.login = await this.storage.get('login');
         this.ready = true;
     }
 
     saveLogin(login: Login) {
         this.login = login;
-        //localStorage.setItem('login',JSON.stringify(this.login));
+        // localStorage.setItem('login',JSON.stringify(this.login));
         this.storage.set('login', login);
     }
 }

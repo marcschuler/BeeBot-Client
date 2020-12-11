@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute, Router} from "@angular/router";
-import {RestService, WorkerData} from "../services/rest.service";
-import {ServerState, TeamspeakConfig} from "../services/login.service";
-import {ActionSheetController, AlertController, ToastController} from "@ionic/angular";
-import {DataService} from "../services/data.service";
+import {ActivatedRoute, Router} from '@angular/router';
+import {RestService, WorkerData} from '../services/rest.service';
+import {ServerState, TeamspeakConfig} from '../services/login.service';
+import {ActionSheetController, AlertController, ToastController} from '@ionic/angular';
+import {DataService} from '../services/data.service';
 
 @Component({
     selector: 'app-beebot',
@@ -38,15 +38,15 @@ export class BeebotPage implements OnInit {
         this.uid = this.route.snapshot.paramMap.get('uid');
         this.rest.get<ServerState>('beebot/' + this.uid).subscribe(s => {
             this.serverState = s;
-        })
+        });
         this.rest.get<WebLog[]>('beebot/' + this.uid + '/logs').subscribe(s => {
             this.logs = s.reverse();
-        })
+        });
         this.rest.botModules(this.uid).subscribe(s => this.worker = s);
     }
 
     ionViewWillEnter() {
-        console.log("(Re)loading BeeBot data");
+        console.log('(Re)loading BeeBot data');
         this.ngOnInit();
     }
 
@@ -58,7 +58,7 @@ export class BeebotPage implements OnInit {
                 icon: 'create-outline',
                 handler: () => {
                     this.config = null;
-                    this.editState = true
+                    this.editState = true;
                     this.rest.botConfig(this.uid).subscribe(config => {
                         this.config = config;
                     });
@@ -83,9 +83,9 @@ export class BeebotPage implements OnInit {
                 }, {
                     text: 'Delete',
                     handler: () => {
-                        console.log('Deleting BeeBot ' + this.uid)
+                        console.log('Deleting BeeBot ' + this.uid);
                         this.rest.delete('beebot/' + this.uid).subscribe(() => {
-                            this.router.navigateByUrl('/')
+                            this.router.navigateByUrl('/');
                             this.data.reloadBeeBots();
                         });
                     }

@@ -7,8 +7,8 @@ import { IonicModule } from '@ionic/angular';
 import { BeebotPageRoutingModule } from './beebot-routing.module';
 
 import { BeebotPage } from './beebot.page';
-import {ModuleInfoComponent} from "../beebot-comp/module-info/module-info.component";
-import {BeebotCompModule} from "../beebot-comp/beebot-comp.module";
+import {ModuleInfoComponent} from '../beebot-comp/module-info/module-info.component';
+import {BeebotCompModule} from '../beebot-comp/beebot-comp.module';
 
 @NgModule({
     imports: [

@@ -7,7 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { ServerStatsPageRoutingModule } from './server-stats-routing.module';
 
 import { ServerStatsPage } from './server-stats.page';
-import {ServicesModule} from "../services/services.module";
+import {ServicesModule} from '../services/services.module';
 
 @NgModule({
     imports: [
