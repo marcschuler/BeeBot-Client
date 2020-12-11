@@ -9,27 +9,27 @@ const routes: Routes = [
   },
   {
     path: 'server-add',
-    loadChildren: () => import('./server/server.module').then( m => m.ServerPageModule)
+    loadChildren: () => import('./pages/server/server.module').then(m => m.ServerPageModule)
   },
   {
     path: 'beebot-add',
-    loadChildren: () => import('./beebot-comp/beebot-add/beebot-add.module').then( m => m.BeebotAddPageModule)
+    loadChildren: () => import('./components-server/beebot-add/beebot-add.module').then(m => m.BeebotAddPageModule)
   },
   {
     path: 'beebot/:uid',
-    loadChildren: () => import('./beebot/beebot.module').then( m => m.BeebotPageModule)
+    loadChildren: () => import('./pages/beebot/beebot.module').then(m => m.BeebotPageModule)
   },
   {
     path: 'server',
-    loadChildren: () => import('./server-stats/server-stats.module').then( m => m.ServerStatsPageModule)
+    loadChildren: () => import('./pages/server-stats/server-stats.module').then(m => m.ServerStatsPageModule)
   },
   {
     path: 'modules',
-    loadChildren: () => import('./beebot-comp/modules/modules.module').then( m => m.ModulesPageModule)
+    loadChildren: () => import('./components-server/modules/modules.module').then(m => m.ModulesPageModule)
   },
   {
     path: 'overview',
-    loadChildren: () => import('./overview/overview.module').then( m => m.OverviewPageModule)
+    loadChildren: () => import('./pages/overview/overview.module').then(m => m.OverviewPageModule)
   },
   {
     path: 'beebot/:uid/clients',

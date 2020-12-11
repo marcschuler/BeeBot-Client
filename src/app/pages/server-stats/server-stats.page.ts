@@ -1,9 +1,9 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {LoginService} from '../services/login.service';
-import {RestService} from '../services/rest.service';
+import {LoginService} from '../../services/login.service';
+import {RestService} from '../../services/rest.service';
 import {ActionSheetController, AlertController, ToastController} from '@ionic/angular';
 import {Router} from '@angular/router';
-import {DataService} from '../services/data.service';
+import {DataService} from '../../services/data.service';
 
 @Component({
     selector: 'app-server-stats',

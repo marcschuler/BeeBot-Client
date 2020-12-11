@@ -3,7 +3,7 @@ import {CommonModule} from '@angular/common';
 import {BotListComponent} from './bot-list/bot-list.component';
 import {IonicModule} from '@ionic/angular';
 import {RouterModule} from '@angular/router';
-import {ServicesModule} from '../services/services.module';
+import {PipesModule} from '../pipes/pipes.module';
 
 
 @NgModule({
@@ -12,7 +12,7 @@ import {ServicesModule} from '../services/services.module';
         CommonModule,
         IonicModule,
         RouterModule,
-        ServicesModule
+        PipesModule
     ],
     exports: [BotListComponent]
 })

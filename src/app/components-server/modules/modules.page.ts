@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {RestService, Violation} from '../../services/rest.service';
-import {ServerStats} from '../../server-stats/server-stats.page';
+import {ServerStats} from '../../pages/server-stats/server-stats.page';
 import {ServerState} from '../../services/login.service';
 
 @Component({

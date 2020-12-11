@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {RestService} from './rest.service';
 import {LoginService, ServerState} from './login.service';
-import {Entry} from '../beebot-comp/generic-comp.service';
+import {Entry} from '../components-server/generic-comp.service';
 
 @Injectable({
     providedIn: 'root'

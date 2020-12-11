@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
-import {RestService, WorkerData} from '../services/rest.service';
-import {ServerState, TeamspeakConfig} from '../services/login.service';
+import {RestService, WorkerData} from '../../services/rest.service';
+import {ServerState, TeamspeakConfig} from '../../services/login.service';
 import {ActionSheetController, AlertController, ToastController} from '@ionic/angular';
-import {DataService} from '../services/data.service';
+import {DataService} from '../../services/data.service';
 
 @Component({
     selector: 'app-beebot',

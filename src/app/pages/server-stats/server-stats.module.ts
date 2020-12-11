@@ -7,7 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { ServerStatsPageRoutingModule } from './server-stats-routing.module';
 
 import { ServerStatsPage } from './server-stats.page';
-import {ServicesModule} from '../services/services.module';
+import {PipesModule} from '../../pipes/pipes.module';
 
 @NgModule({
     imports: [
@@ -15,7 +15,7 @@ import {ServicesModule} from '../services/services.module';
         FormsModule,
         IonicModule,
         ServerStatsPageRoutingModule,
-        ServicesModule
+        PipesModule
     ],
   declarations: [ServerStatsPage]
 })

@@ -11,8 +11,9 @@ import {AppRoutingModule} from './app-routing.module';
 import {IonicStorageModule} from '@ionic/storage';
 import {RestService} from './services/rest.service';
 import {HttpClientModule} from '@angular/common/http';
-import {ServicesModule} from './services/services.module';
 import {ComponentsModule} from './components/components.module';
+import {SimpledatePipe} from './pipes/simpledate.pipe';
+import {PipesModule} from './pipes/pipes.module';
 
 @NgModule({
     declarations: [AppComponent],
@@ -23,8 +24,8 @@ import {ComponentsModule} from './components/components.module';
         AppRoutingModule,
         HttpClientModule,
         IonicStorageModule.forRoot(),
-        ServicesModule,
-        ComponentsModule
+        ComponentsModule,
+        PipesModule
     ],
     providers: [
         StatusBar,

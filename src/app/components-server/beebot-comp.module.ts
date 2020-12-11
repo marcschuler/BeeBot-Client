@@ -6,6 +6,7 @@ import {FormsModule} from '@angular/forms';
 import {AppModule} from '../app.module';
 import {ViolationComponent} from './violation/violation.component';
 import {LogsComponent} from './logs/logs.component';
+import {PipesModule} from '../pipes/pipes.module';
 
 
 @NgModule({
@@ -13,7 +14,8 @@ import {LogsComponent} from './logs/logs.component';
     imports: [
         CommonModule,
         IonicModule,
-        FormsModule
+        FormsModule,
+        PipesModule
     ],
     exports: [CompGenericComponent, ViolationComponent, LogsComponent]
 })
