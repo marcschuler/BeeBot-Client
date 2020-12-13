@@ -50,6 +50,7 @@ export class BeeBotGraphsPage implements OnInit {
 
     private generatePieChart(id, data) {
 
+        // tslint:disable-next-line:no-unused-expression
         new Chart(id, {
             type: 'pie',
             data: {
@@ -71,8 +72,8 @@ export class BeeBotGraphsPage implements OnInit {
     }
 
     private prepareSimpleChartData(array: any[]) {
-        const names = this.uniqueValues(array);
-        const values = names.map(n => this.countOccurences(array, n));
+        const names = BeeBotGraphsPage.uniqueValues(array);
+        const values = names.map(n => BeeBotGraphsPage.countOccurences(array, n));
 
         return {
             names,
@@ -80,11 +81,11 @@ export class BeeBotGraphsPage implements OnInit {
         };
     }
 
-    private uniqueValues(array: any[]) {
+    private static uniqueValues(array: any[]) {
         return [...new Set(array)];
     }
 
-    private countOccurences(array: any[], search: string) {
+    private static countOccurences(array: any[], search: string) {
         let count = 0;
         for (let i = 0; i < array.length; i++) {
             if (array[i] === search) {
